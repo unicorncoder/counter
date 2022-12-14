@@ -1,32 +1,35 @@
-import { useState } from 'react'
-import {Box, Button, Typography} from '@mui/material'
+// import { useState } from 'react'
+import {AppBar, Box, Button, Toolbar, Typography} from '@mui/material'
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Counter from "./components/Counter"
+import Stopwatch from "./components/Stopwatch"
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  const incrementCount =()=>{
-    setCount(count+1)
-  }
-
-  const decrementCount =()=>{
-    setCount(count-1)
-  }
-
-  const resetCount =()=>{
-    setCount(0)
-  } 
+  
 
   return (
-    <Box sx={{height:"100vh", display:"flex", justifyContent:"center" }}>
-        <Box sx={{width:"400px", height:"400px", backgroundColor:"aliceblue", borderRadius:"15px", display:"grid", gridTemplateColumns:"1fr 1fr 1fr", position:"center", alignSelf:"center"}}>
-        <Typography variant="h4" sx={{textAlign:"center", marginTop:15, gridColumnStart:1, gridColumnEnd:4}}>{count}</Typography>
-        <Button onClick={incrementCount}>Increment</Button>
-        <Button onClick={decrementCount}>Decrement</Button>
-        <Button onClick={resetCount}>Reset</Button>
-    </Box>
-    </Box>
-  
+    <BrowserRouter>
+    <Box sx={{width:"99vw", height:"96vh"}}>
+        <Box>
+          <AppBar position='relative'>
+            <Toolbar>
+            <Typography variant="h5" sx={{marginRight:"10px"}}>Menu</Typography>
+            
+            <Link to={"/stopwatch"} style={{paddingRight:7, color:"white"}}>Stopwatch</Link>
+            <Link to={"/counter"} style={{color:"white"}}>Counter</Link>
+            
+            </Toolbar>
+          </AppBar>
+          <Routes>
+            <Route path="/stopwatch" element={<Stopwatch/>}></Route>
+            <Route path="/counter" element={<Counter/>}></Route>
+          </Routes>
+        </Box>
+     </Box>
+    </BrowserRouter>
   )
 }
 
 export default App
+
+// display:"flex", justifyContent:"center"
